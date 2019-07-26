@@ -31,7 +31,7 @@ public class BpResponseBody {
     private String alternateNumber;
     @SerializedName("GSTIN")
     @Expose
-    private Object GSTIN;
+    private String GSTIN;
     @SerializedName("area")
     @Expose
     private AreaO area;
@@ -112,11 +112,11 @@ public class BpResponseBody {
         this.alternateNumber = alternateNumber;
     }
 
-    public Object getGSTIN() {
+    public String getGSTIN() {
         return GSTIN;
     }
 
-    public void setGSTIN(Object GSTIN) {
+    public void setGSTIN(String GSTIN) {
         this.GSTIN = GSTIN;
     }
 

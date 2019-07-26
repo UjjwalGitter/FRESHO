@@ -46,7 +46,7 @@ public class FragmentCategory extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root_view = inflater.inflate(R.layout.fragment_category, null);
-       // initComponent();
+        // initComponent();
         recyclerView = root_view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -57,7 +57,7 @@ public class FragmentCategory extends Fragment {
 
     private void initComponent() {
         recyclerView = (RecyclerView) root_view.findViewById(R.id.recyclerView);
-       // recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+        // recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //set data and list adapter
         adapter = new AdapterCategory(getActivity(), new ArrayList<Category>());
@@ -113,19 +113,31 @@ public class FragmentCategory extends Fragment {
         ActivityMain.getInstance().showDialogFailed(message);
     }
 
-    private void getCatData(){
+    private void getCatData() {
+
         Call<PostList> result = CatApi.getService().getPostList();
         result.enqueue(new Callback<PostList>() {
+            List<Result> newMain ;
+
             @Override
             public void onResponse(Call<PostList> call, Response<PostList> response) {
                 PostList ujju = response.body();
-                List<Result> main = ujju.getResults();
-                Log.i("retr",ujju.toString());
-                Log.i("retr","sd");
-                for (int i=0;i<main.size();i++){
-                    Log.i("humble",main.get(i).getName().toString());
+                for (int i = 0; i < ujju.getCount(); i++) {
+                    if (ujju.getResults().get(i).getCategoryTreeId() > 4) {
+                        //  main.add(ujju.getResults().get(i));
+                    }
                 }
-                recyclerView.setAdapter(new CatAdapter(getContext(),ujju.getResults()));
+                Log.i("retr", ujju.toString());
+                List<Result> main=ujju.getResults();
+                Log.i("retr", "sd");
+                for (int i = 0; i < 5; i++) {
+                    if (main.get(i).getCategoryTreeId() < 4) {
+                        main.remove(main.get(i));
+                    }
+                        Log.i("humble", main.get(i).getName().toString());
+                }
+
+                recyclerView.setAdapter(new CatAdapter(getContext(),main));
 //                Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
             }
 

@@ -81,7 +81,6 @@ public class ProductsPrime extends AppCompatActivity {
 //                }if (pickup.getSelectedItem()=="Kg"){
 //                    value="kilogram";
 //                }
-//
 //            }
 
 //            @Override

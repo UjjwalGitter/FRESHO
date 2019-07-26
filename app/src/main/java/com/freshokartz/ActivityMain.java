@@ -2,8 +2,10 @@ package com.freshokartz;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -53,6 +55,7 @@ public class ActivityMain extends AppCompatActivity {
     public boolean category_load = false, news_load = false;
 
     static ActivityMain activityMain;
+    SessionManagement session;
 
     public static ActivityMain getInstance() {
         return activityMain;
@@ -66,6 +69,8 @@ public class ActivityMain extends AppCompatActivity {
         db = new DatabaseHandler(this);
         sharedPref = new SharedPref(this);
 
+        session = new SessionManagement(getApplicationContext());
+
         initToolbar();
         initDrawerMenu();
         initComponent();
@@ -78,6 +83,9 @@ public class ActivityMain extends AppCompatActivity {
             startActivity(new Intent(this, ActivityInstruction.class));
             sharedPref.setFirstLaunch(false);
         }
+
+
+
     }
 
     private void initToolbar() {
@@ -201,6 +209,10 @@ public class ActivityMain extends AppCompatActivity {
                 i = new Intent(this, LoginAndRegistration.class);
                 startActivity(i);
                 break;
+            case R.id.nav_profile:
+                i = new Intent(this, ActivityProfile.class);
+                startActivity(i);
+                break;
             case R.id.nav_cart:
                 i = new Intent(this, ActivityShoppingCart.class);
                 startActivity(i);
@@ -212,6 +224,10 @@ public class ActivityMain extends AppCompatActivity {
             case R.id.nav_history:
                 i = new Intent(this, ActivityOrderHistory.class);
                 startActivity(i);
+                break;
+
+            case R.id.nav_logout:
+                session.logoutUser();
                 break;
 
             case R.id.nav_news:
@@ -236,6 +252,8 @@ public class ActivityMain extends AppCompatActivity {
             case R.id.nav_about:
                 Tools.showDialogAbout(this);
                 break;
+
+
             default:
                 break;
         }
@@ -266,6 +284,18 @@ public class ActivityMain extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateNavCounter(nav_view);
+
+        if(session.isLoggedIn()){
+            nav_view.getMenu().findItem(R.id.nav_login).setVisible(false);
+            nav_view.getMenu().findItem(R.id.nav_profile).setVisible(true);
+            nav_view.getMenu().findItem(R.id.nav_logout).setVisible(true);
+        }
+        else{
+            nav_view.getMenu().findItem(R.id.nav_login).setVisible(true);
+            nav_view.getMenu().findItem(R.id.nav_profile).setVisible(false);
+            nav_view.getMenu().findItem(R.id.nav_logout).setVisible(false);
+        }
+
     }
 
     static boolean active = false;

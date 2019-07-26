@@ -9,7 +9,6 @@
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <include layout="@layout/toolbar" />
 
     </android.support.design.widget.AppBarLayout>
@@ -71,7 +70,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
-
     </LinearLayout>
+
 
 </LinearLayout>

@@ -23,7 +23,10 @@ public class Result {
     private Boolean status;
 
     public Integer getCategoryTreeId() {
-        return categoryTreeId;
+        if(categoryTreeId>4) {
+            return categoryTreeId;
+        }
+        return 0;
     }
 
     public void setCategoryTreeId(Integer categoryTreeId) {

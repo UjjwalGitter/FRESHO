@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <android.support.v7.widget.CardView android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:layout_marginBottom="@dimen/spacing_small"
-    android:layout_marginLeft="@dimen/spacing_medium"
-    android:layout_marginRight="@dimen/spacing_medium"
-    android:layout_marginTop="@dimen/spacing_small"
-    app:cardBackgroundColor="#E7BE6A"
-    app:cardCornerRadius="@dimen/card_radius"
-    app:cardElevation="@dimen/card_elevation"
+    android:layout_marginBottom="1dp"
+    app:cardBackgroundColor="#25DAD5D5"
+    app:cardElevation="0dp"
     app:cardUseCompatPadding="false"
+    app:layout_goneMarginBottom="1dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
     android:orientation="horizontal"
-    android:layout_marginTop="5dp"
-    android:layout_height="70dp">
+    android:layout_height="match_parent">
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -26,15 +21,15 @@
         android:src="@mipmap/ic_launcher"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:text="@string/app_name"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
         android:id="@+id/catName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/abhaya_libre"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="23sp" />
 </LinearLayout>
 </android.support.v7.widget.CardView>
